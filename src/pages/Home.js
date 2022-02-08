@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import '../styles/home.css';
 
 const BASE_URL = 'http://13.235.87.215:4000';
@@ -8,13 +8,13 @@ const BASE_URL = 'http://13.235.87.215:4000';
 function Home() {
     const [categoryList, setCategoryList] = useState([]);
     const [username, setUsername] = useState('User');
+    const navigate = useNavigate();
 
     const logoutFn = () => {
         localStorage.removeItem('username');
         localStorage.removeItem('userId');
         localStorage.removeItem('token')
-
-        window.location.href = "/";
+        navigate('/')
     }
 
     useEffect(() => {
@@ -43,8 +43,8 @@ function Home() {
                                 <Link className="text-decoration-none" to={"/home"}>Ecommerce</Link>
                             </div>
                             <div className="user-actions d-flex flex-row">
-                                <Link className="text-decoration-none" to={"/account"}>Account</Link>
-                                <Link className="text-decoration-none" to={"/cart"}>Cart</Link>
+                                <Link className="text-decoration-none" to={"/home/account"}>Account</Link>
+                                <Link className="text-decoration-none" to={"/home/cart"}>Cart</Link>
                                 <div className="user-intro">Hi {username}</div>
                                 <div className="logout-btn" onClick={logoutFn}>Logout</div>
                             </div>
@@ -52,26 +52,7 @@ function Home() {
                     </div>
                 </div>
             </div>
-            <div className="container">
-                <div className="row">
-                    <div className="col">
-                        <h2 className="home-title text-center">Welcome to Ecommerce</h2>
-                        <div className="category-list d-flex flex-row justify-content-center align-items-center">
-                            <div className="category-item rounded-3 d-flex justify-content-center align-items-center">
-                                <Link className="text-decoration-none text-white" to={"/products"}>All Products</Link>
-                            </div>
-                            {
-                                categoryList.map((category) => (
-                                    <div key={category.categoryId} className="category-item rounded-3 d-flex justify-content-center align-items-center">
-                                        <Link to={`/products${category.categoryId ? `?categoryId=${category.categoryId}` : ''}`} className="text-decoration-none text-white">{category.name}</Link>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                        <div className="category-title text-center">Select a category to start shopping</div>
-                    </div>
-                </div>
-            </div>
+        <Outlet/>
         </div>
     )
 }

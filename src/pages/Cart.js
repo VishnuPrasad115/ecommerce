@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 import '../styles/cart.css';
 
@@ -9,6 +9,7 @@ const BASE_URL = 'http://13.235.87.215:4000';
 function Cart() {
     const [orderDetails, setOrderDetails] = useState({});
     const [username, setUsername] = useState('User');
+    const navigate = useNavigate();
 
     useEffect(() => {
         setUsername(localStorage.getItem("username"));
@@ -79,28 +80,11 @@ function Cart() {
         localStorage.removeItem('userId');
         localStorage.removeItem('token')
 
-        window.location.href = "/";
+        navigate('/')
     }
 
     return (
         <div id="cartPage">
-            <div id="header">
-                <div className="container">
-                    <div className="row">
-                        <div className="header-wrapper d-flex justify-content-between">
-                            <div className="logo d-inline-block">
-                                <Link className="text-decoration-none" to={"/home"}>Ecommerce</Link>
-                            </div>
-                            <div className="user-actions d-flex flex-row">
-                                <Link className="text-decoration-none" to={"/account"}>Account</Link>
-                                <Link className="text-decoration-none" to={"/cart"}>Cart</Link>
-                                <div className="user-intro">Hi {username}</div>
-                                <div className="logout-btn" onClick={logoutFn}>Logout</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div className="container">
                 <div className="row">
                     <div className="cart-title">My Cart</div>

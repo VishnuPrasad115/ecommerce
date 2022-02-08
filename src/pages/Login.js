@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import '../styles/login.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const BASE_URL = 'http://13.235.87.215:4000';
 
 function Login() {
     const [showSignup, setShowSignup] = useState(false);
+    const navigate = useNavigate();
     const loginFn = () => {
         const username = document.getElementById("username");
         const password = document.getElementById("password");
@@ -22,7 +23,7 @@ function Login() {
                     localStorage.setItem("username", response.data.data.username)
                     localStorage.setItem("userId", response.data.data.userId);
                     localStorage.setItem("token", response.data.data.token);
-                    window.location.href = "/home";
+                    navigate("/home");
                 }
             })
             .catch(function (error) {
@@ -45,7 +46,7 @@ function Login() {
                     localStorage.setItem("username", response.data.data.username)
                     localStorage.setItem("userId", response.data.data.userId);
                     localStorage.setItem("token", response.data.data.token);
-                    window.location.href = "/home";
+                    navigate("/home");
                 }
             })
             .catch(function (error) {

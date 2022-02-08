@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../styles/productList.css';
 
 const BASE_URL = 'http://13.235.87.215:4000';
@@ -13,6 +13,7 @@ function ProductList() {
 	const [minPrice, setMinPrice] = useState(0);
 	const [maxPrice, setMaxPrice] = useState(-1);
 	const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
 
 	useEffect(() => {
 		const data = {
@@ -100,7 +101,7 @@ function ProductList() {
 	}
 
 	const clearFilter = () => {
-		window.location.href = "/products";
+        navigate('/products')
 	}
 
 	const logoutFn = () => {
@@ -108,28 +109,11 @@ function ProductList() {
         localStorage.removeItem('userId');
 		localStorage.removeItem('token')
 
-        window.location.href = "/";
+        navigate('/')
     }
 
 	return (
 		<div id="productListPage">
-			<div id="header">
-				<div className="container">
-					<div className="row">
-						<div className="header-wrapper d-flex justify-content-between">
-							<div className="logo d-inline-block">
-								<Link className="text-decoration-none" to={"/home"}>Ecommerce</Link>
-							</div>
-							<div className="user-actions d-flex flex-row">
-								<Link className="text-decoration-none" to={"/account"}>Account</Link>
-								<Link className="text-decoration-none" to={"/cart"}>Cart</Link>
-								<div className="user-intro">Hi {username}</div>
-								<div className="logout-btn" onClick={logoutFn}>Logout</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 			<div className="container">
 				<div className="row">
 					<h2 className="product-list-title text-center">All Products</h2>
