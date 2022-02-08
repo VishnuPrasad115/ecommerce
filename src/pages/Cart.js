@@ -9,7 +9,6 @@ const BASE_URL = 'http://13.235.87.215:4000';
 function Cart() {
     const [orderDetails, setOrderDetails] = useState({});
     const [username, setUsername] = useState('User');
-    const navigate = useNavigate();
 
     useEffect(() => {
         setUsername(localStorage.getItem("username"));
@@ -74,15 +73,6 @@ function Cart() {
                 console.log(error);
             });
     }
-
-    const logoutFn = () => {
-        localStorage.removeItem('username');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('token')
-
-        navigate('/')
-    }
-
     return (
         <div id="cartPage">
             <div className="container">

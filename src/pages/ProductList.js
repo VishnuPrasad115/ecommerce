@@ -104,14 +104,6 @@ function ProductList() {
         navigate('/products')
 	}
 
-	const logoutFn = () => {
-        localStorage.removeItem('username');
-        localStorage.removeItem('userId');
-		localStorage.removeItem('token')
-
-        navigate('/')
-    }
-
 	return (
 		<div id="productListPage">
 			<div className="container">

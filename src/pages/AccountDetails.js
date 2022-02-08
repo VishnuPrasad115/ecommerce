@@ -14,14 +14,6 @@ function AccountDetails() {
     const [address, setAddress] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const [successMsg, setSuccessMsg] = useState('');
-    const navigate = useNavigate();
-
-    const logoutFn = () => {
-        localStorage.removeItem('username');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('token')
-        navigate('/')
-    }
 
     useEffect(() => {
         const data = {

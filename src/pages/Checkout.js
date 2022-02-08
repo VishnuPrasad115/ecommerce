@@ -9,7 +9,6 @@ function Checkout() {
     const [orderDetails, setOrderDetails] = useState({});
     const [confirmPaymentSuccess, setConfirmPaymentSuccess] = useState(false);
     const [username, setUsername] = useState('User');
-    const navigate = useNavigate();
 
     useEffect(() => {
         setUsername(localStorage.getItem("username"));
@@ -46,14 +45,6 @@ function Checkout() {
             .catch(function (error) {
                 console.log(error);
             });
-    }
-
-    const logoutFn = () => {
-        localStorage.removeItem('username');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('token')
-
-        navigate('/')
     }
 
     return (

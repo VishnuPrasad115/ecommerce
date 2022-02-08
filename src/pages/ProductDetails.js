@@ -8,7 +8,6 @@ const BASE_URL = 'http://13.235.87.215:4000';
 function ProductDetails() {
     const [productDetails, setProductDetails] = useState({});
     const [username, setUsername] = useState('User');
-    const navigate = useNavigate();
     const {productId} = useParams()
 
     useEffect(() => {
@@ -47,14 +46,6 @@ function ProductDetails() {
             .catch(function (error) {
                 console.log(error);
             });
-    }
-
-    const logoutFn = () => {
-        localStorage.removeItem('username');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('token')
-
-        navigate('/')
     }
 
     return (
