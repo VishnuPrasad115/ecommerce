@@ -22,3 +22,7 @@
 #loginPage .input-group {
     margin-bottom: 15px;
 }
+.auth0-button-container {
+    display: flex;
+    justify-content: center;
+}
