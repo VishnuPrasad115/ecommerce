@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -14,12 +15,13 @@ function AccountDetails() {
     const [address, setAddress] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const [successMsg, setSuccessMsg] = useState('');
+    const {logout} = useAuth0();
 
     const logoutFn = () => {
         localStorage.removeItem('username');
         localStorage.removeItem('userId');
         localStorage.removeItem('token')
-
+        logout({ returnTo: window.location.origin })
         window.location.href = "/";
     }
 

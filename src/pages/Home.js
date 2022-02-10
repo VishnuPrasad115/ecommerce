@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -8,6 +9,7 @@ const BASE_URL = 'http://13.235.87.215:4000';
 function Home() {
     const [categoryList, setCategoryList] = useState([]);
     const [username, setUsername] = useState('User');
+    const { user,getAccessTokenSilently  } = useAuth0();
 
     const logoutFn = () => {
         localStorage.removeItem('username');
@@ -16,6 +18,12 @@ function Home() {
 
         window.location.href = "/";
     }
+    useEffect(()=>{
+        if (user) {                
+            localStorage.setItem("username", user.email)
+            localStorage.setItem("userId", user.sub);
+        }
+    },[user])
 
     useEffect(() => {
         setUsername(localStorage.getItem("username"));
@@ -31,7 +39,7 @@ function Home() {
             .catch(function (error) {
                 console.log(error);
             });
-    }, []);
+    }, [user]);
 
     return (
         <div id="homePage">

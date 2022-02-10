@@ -4,8 +4,7 @@ const Auth0Button = () => {
   const { loginWithRedirect } = useAuth0();
   const loginUser = async () => {
     try {
-      const response = await loginWithRedirect();
-      console.log(JSON.stringify(response));
+      await loginWithRedirect();
     } catch (err) {
       console.log(err);
     }
