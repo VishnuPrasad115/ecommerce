@@ -9,13 +9,13 @@ const BASE_URL = 'http://13.235.87.215:4000';
 function Home() {
     const [categoryList, setCategoryList] = useState([]);
     const [username, setUsername] = useState('User');
-    const { user } = useAuth0();
+    const { user, logout } = useAuth0();
 
     const logoutFn = () => {
         localStorage.removeItem('username');
         localStorage.removeItem('userId');
         localStorage.removeItem('token')
-
+        logout({ returnTo: window.location.origin })
         window.location.href = "/";
     }
     useEffect(()=>{
