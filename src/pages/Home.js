@@ -9,7 +9,7 @@ const BASE_URL = 'http://13.235.87.215:4000';
 function Home() {
     const [categoryList, setCategoryList] = useState([]);
     const [username, setUsername] = useState('User');
-    const { user,getAccessTokenSilently  } = useAuth0();
+    const { user } = useAuth0();
 
     const logoutFn = () => {
         localStorage.removeItem('username');
