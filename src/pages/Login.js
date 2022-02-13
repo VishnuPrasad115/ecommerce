@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import '../styles/login.css';
 import { Link, useNavigate } from "react-router-dom";
 import Auth0Button from "../components/Auth0Button";
+import { useAuth0 } from "@auth0/auth0-react";
+import { checkUser } from "../service/auth";
 
 const BASE_URL = 'http://13.235.87.215:4000';
 
 function Login() {
     const [showSignup, setShowSignup] = useState(false);
     const navigate = useNavigate();
+    const { user, } = useAuth0();
     const loginFn = () => {
         const username = document.getElementById("username");
         const password = document.getElementById("password");
@@ -17,7 +20,6 @@ function Login() {
             username: username.value,
             password: password.value
         };
-
         axios.post(BASE_URL + '/api/v1/user/login', data)
             .then(function (response) {
                 if (response.data.success) {
@@ -32,6 +34,25 @@ function Login() {
             });
     }
 
+
+    useEffect(() => {
+        if (user) {
+            checkUserAlreadyExist()
+        }
+      }, [user]);
+
+      const checkUserAlreadyExist = async()=>{
+        let response = await checkUser({
+            username: user.nickname, 
+            password: user.sub
+        })
+        if(response.status === 'success') {
+            localStorage.setItem("username", response.data.data.username)
+            localStorage.setItem("userId", response.data.data.userId);
+            localStorage.setItem("token", response.data.data.token);
+            navigate("/home");
+        }
+      }
     const signupFn = () => {
         const username = document.getElementById("username");
         const password = document.getElementById("password");

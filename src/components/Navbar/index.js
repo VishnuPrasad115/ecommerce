@@ -11,14 +11,10 @@ const Navbar = () => {
   };
 
   const [username, setUsername] = useState("User");
-  const { user, logout, getAccessTokenSilently } = useAuth0();
+  const { user, logout } = useAuth0();
   const setUserData = async () => {
-    const accessToken = await getAccessTokenSilently({});
-    console.log("yaya");
-    console.log(accessToken);
-    localStorage.setItem("username", user.email);
+    localStorage.setItem("username", user.given_name);
     localStorage.setItem("userId", user.sub);
-    localStorage.setItem("token", accessToken);
     setUsername(localStorage.getItem("username"));
   };
   useEffect(() => {

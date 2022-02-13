@@ -11,7 +11,7 @@ function App() {
       <Auth0Provider
         domain="dev-9l0gujem.us.auth0.com"
         clientId="DpJ0lO987zvh4tQ0sGmJ4T9TqfQF8RSa"
-        redirectUri={window.location.origin + "/home"}
+        redirectUri={window.location.origin}
       >
         <AppRoutes />
       </Auth0Provider>
