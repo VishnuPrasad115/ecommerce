@@ -60,7 +60,7 @@ const AppRoutes = () => (
         }
       />
       <Route
-        path="products"
+        path="products/:categoryId"
         element={
           <Suspense fallback={<div className="loader"></div>}>
             <ProductList />

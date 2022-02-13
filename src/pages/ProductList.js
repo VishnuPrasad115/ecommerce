@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import '../styles/productList.css';
 
 const BASE_URL = 'http://13.235.87.215:4000';
@@ -14,7 +14,8 @@ function ProductList() {
 	const [maxPrice, setMaxPrice] = useState(-1);
 	const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
-
+	const {categoryId} = useParams()
+	
 	useEffect(() => {
 		const data = {
 			token: localStorage.getItem("token")
@@ -33,12 +34,12 @@ function ProductList() {
 		if (currentCategory) {
 
 		}
-		if (window.location.search) {
-			setCurrentCategory(window.location.search.split("=")[1]);
-			data.categoryId = window.location.search.split("=")[1];
+		if (categoryId) {
+			setCurrentCategory(categoryId);
+			data.categoryId = categoryId;
 		}
 		fetchProducts(data);
-	}, []);
+	}, [categoryId]);
 
 	const searchProduct = (e) => {
 		setSearchQuery(e.target.value);
@@ -66,10 +67,10 @@ function ProductList() {
 			});
 	}
 
-	const updateCategory = (categoryId) => {
-		setCurrentCategory(categoryId);
+	const updateCategory = (id) => {
+		setCurrentCategory(id);
 		const data = {
-			categoryId,
+			id,
 			token: localStorage.getItem("token")
 		};
 		fetchProducts(data);
@@ -119,7 +120,7 @@ function ProductList() {
 							<div>
 								{
 									categoryList.map((category) => (
-										<Link onClick={() => updateCategory(category.categoryId)} key={category.categoryId} className={"d-flex text-decoration-none " + (category.categoryId == currentCategory ? 'active' : undefined)} to={"/products?categoryId=" + category.categoryId}>{category.name}</Link>
+										<Link onClick={() => updateCategory(category.categoryId)} key={category.categoryId} className={"d-flex text-decoration-none " + (category.categoryId == currentCategory ? 'active' : undefined)} to={`/home/products/${category.categoryId}`}>{category.name}</Link>
 									))
 								}
 							</div>
@@ -159,7 +160,7 @@ function ProductList() {
 						<div className="product-list-box">
 							{
 								productList.map((product) => (
-									<Link key={product.productId} className="product-item text-decoration-none d-inline-block" to={"/product/" + product.productId + "/details"}>
+									<Link key={product.productId} className="product-item text-decoration-none d-inline-block" to={`/home/product/${product.productId}/details`}>
 										<div className="product-img">
 											<img src="https://img.favpng.com/8/17/0/product-design-clip-art-logo-food-png-favpng-TsCQEsJH2LUYN3d5Q6RzrTsqL.jpg" />
 										</div>

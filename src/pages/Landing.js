@@ -42,11 +42,7 @@ const Landing = () => {
                 className="category-item rounded-3 d-flex justify-content-center align-items-center"
               >
                 <Link
-                  to={`/home/products${
-                    category.categoryId
-                      ? `?categoryId=${category.categoryId}`
-                      : ""
-                  }`}
+                  to={`/home/products/${category.categoryId}`}
                   className="text-decoration-none text-white"
                 >
                   {category.name}
