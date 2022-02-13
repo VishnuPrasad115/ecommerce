@@ -31,7 +31,7 @@ const Landing = () => {
             <div className="category-item rounded-3 d-flex justify-content-center align-items-center">
               <Link
                 className="text-decoration-none text-white"
-                to={"/products"}
+                to={"/home/products"}
               >
                 All Products
               </Link>
@@ -42,7 +42,7 @@ const Landing = () => {
                 className="category-item rounded-3 d-flex justify-content-center align-items-center"
               >
                 <Link
-                  to={`/products${
+                  to={`/home/products${
                     category.categoryId
                       ? `?categoryId=${category.categoryId}`
                       : ""

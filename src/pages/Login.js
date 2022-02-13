@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from 'axios';
 import '../styles/login.css';
 import { Link, useNavigate } from "react-router-dom";
+import Auth0Button from "../components/Auth0Button";
 
 const BASE_URL = 'http://13.235.87.215:4000';
 
@@ -87,6 +88,9 @@ function Login() {
                                     </div>
                                     <div className="input-group">
                                         <input type="submit" className="form-control btn btn-primary" value="Log in as User" onClick={loginFn} />
+                                    </div>
+                                    <div className="auth0-button-container">
+                                        <Auth0Button/>
                                     </div>
                                     <div className="signup-btn text-center text-info" onClick={toggleSignup}>Dont have an Account ? Signup</div>
                                     <div className="auth-error-msg text-danger text-center"></div>
